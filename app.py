@@ -62,7 +62,7 @@ def get_all_playlists():
             break
 
         return playlist_id
-    
+
 def get_track_ids(playlist_id):
     session['token_info'], is_user_authorised = get_token()
     session.modified = True
@@ -85,7 +85,6 @@ def get_track_data(track_id):
     if not is_user_authorised:
         return redirect(url_for('login', _external=False))
     sp = spotipy.Spotify(auth=session.get('token_info').get('access_token'))
-
     while True:
         metadata = sp.track(track_id)
         track_metadata = {"name": metadata['name'], "album": metadata['album']['name'],
